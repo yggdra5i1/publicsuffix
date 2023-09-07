@@ -5,9 +5,9 @@ import (
 )
 
 type Domain struct {
-	tld string
-	sld string
-	trd string
+	Tld string
+	Sld string
+	Trd string
 }
 
 func NameToLabels(name string) []string {
@@ -17,13 +17,13 @@ func NameToLabels(name string) []string {
 func NewDomain(args ...string) *Domain {
 	d := &Domain{}
 	if len(args) > 0 {
-		d.tld = args[0]
+		d.Tld = args[0]
 	}
 	if len(args) > 1 {
-		d.sld = args[1]
+		d.Sld = args[1]
 	}
 	if len(args) > 2 {
-		d.trd = args[2]
+		d.Trd = args[2]
 	}
 	return d
 }
@@ -33,31 +33,31 @@ func (d *Domain) String() string {
 }
 
 func (d *Domain) ToArray() []string {
-	return []string{d.trd, d.sld, d.tld}
+	return []string{d.Trd, d.Sld, d.Tld}
 }
 
 func (d *Domain) Name() string {
-	return strings.Join([]string{d.trd, d.sld, d.tld}, ".")
+	return strings.Join([]string{d.Trd, d.Sld, d.Tld}, ".")
 }
 
 func (d *Domain) Domain() string {
 	if d.DomainCheck() {
-		return strings.Join([]string{d.sld, d.tld}, ".")
+		return strings.Join([]string{d.Sld, d.Tld}, ".")
 	}
 	return ""
 }
 
 func (d *Domain) Subdomain() string {
 	if d.SubdomainCheck() {
-		return strings.Join([]string{d.trd, d.sld, d.tld}, ".")
+		return strings.Join([]string{d.Trd, d.Sld, d.Tld}, ".")
 	}
 	return ""
 }
 
 func (d *Domain) DomainCheck() bool {
-	return !(d.tld == "" || d.sld == "")
+	return !(d.Tld == "" || d.Sld == "")
 }
 
 func (d *Domain) SubdomainCheck() bool {
-	return !(d.tld == "" || d.sld == "" || d.trd == "")
+	return !(d.Tld == "" || d.Sld == "" || d.Trd == "")
 }
